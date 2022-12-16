@@ -55,6 +55,25 @@ const Section = ({children, title}): Node => {
 };
 
 const App: () => Node = () => {
+  const randInt = (end, start = 0) =>
+    Math.floor(Math.random() * (end - start) + start);
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  const names = Array.from({length: 30000}, () =>
+    Array.from({length: 8}, () => alphabet[randInt(alphabet.length)]).join(''),
+  );
+
+  names.sort(localeCompare);
+
+  function localeCompare(a, b) {
+    const s = Date.now();
+    const result = a.localeCompare(b);
+    const e = Date.now();
+    if (e - s > 100) {
+      console.log(`slow localeCompare: ${e - s}ms for '${a}' vs '${b}'`);
+    }
+    return result;
+  }
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
