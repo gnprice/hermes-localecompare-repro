@@ -62,7 +62,10 @@ const App: () => Node = () => {
     Array.from({length: 8}, () => alphabet[randInt(alphabet.length)]).join(''),
   );
 
+  console.log('sorting...');
+  const s = Date.now();
   names.sort(localeCompare);
+  console.log(`...done, took ${Date.now() - s}ms`);
 
   function localeCompare(a, b) {
     const s = Date.now();
